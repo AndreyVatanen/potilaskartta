@@ -1,0 +1,194 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+
+}
+.potilas-kartta {
+    margin-top: -5px;
+    height: 1px;
+    color: white;
+    position: relative;
+}
+
+
+.odottava_laatikko{
+    width: 300px;
+    height: 250px;
+    background-color: green;
+    margin: 20px auto;
+    position: relative;
+}
+
+.odottavat_lista{
+    width: 275px;
+    height: 190px;
+    background-color: white;
+    margin: 20px auto;
+    position: relative;
+}
+
+.odottava_laatikko{top: 35px; left:-150px}
+
+
+.ambulanssi_laatikko{
+    width: 300px;
+    height: 250px;
+    background-color: orangered;
+    margin: 20px auto;
+    position: relative;
+}
+
+.ambulanssi_laatikko{top: -235px; left:155px}
+
+.ambulanssi_lista{
+    width: 275px;
+    height: 190px;
+    background-color: white;
+    margin: 20px auto;
+    position: relative;
+}
+
+.paivystys_laatikko {
+    width: 610px;
+    height: 500px;
+    background-color: orange;
+    margin: 20px auto;
+    position: relative;
+}
+
+.paivystys_laatikko{top: -250px; left:1px}
+
+.potilaspaikka1,
+.potilaspaikka2,
+.potilaspaikka3,
+.potilaspaikka4,
+.potilaspaikka5,
+.potilaspaikka6,
+.potilaspaikka7,
+.potilaspaikka8,
+.potilaspaikka9
+{
+    width: 100px;
+    height: 100px;
+    border: 2px solid blue;
+    background-color: white;
+    position: absolute;
+}
+
+
+
+.potilaspaikka1{ top: 20px; left:20px }
+.potilaspaikka2{top: 20px; left: 160px}
+.potilaspaikka3{top: 20px; left: 300px}
+.potilaspaikka4{top: 185px; left: 20px}
+.potilaspaikka5{top: 185px; left: 160px}
+.potilaspaikka6{top: 185px; left: 300px}
+.potilaspaikka7{top: 350px; left: 20px}
+.potilaspaikka8{top: 350px; left: 160px}
+.potilaspaikka9{top: 350px; left: 300px}
+
+.numero1,
+.numero2,
+.numero3,
+.numero4,
+.numero5,
+.numero6,
+.numero7,
+.numero8,
+.numero9
+{
+    color: black;
+    position: absolute;
+
+}
+
+
+.numero1{ top:-20px; left:25px }
+.numero2{ top:-20px; left:25px }
+.numero3{ top:-20px; left:25px }
+.numero4{ top:-20px; left:25px }
+.numero5{ top:-20px; left:25px }
+.numero6{ top:-20px; left:25px }
+.numero7{ top:-20px; left:25px }
+.numero8{ top:-20px; left:25px }
+.numero9{ top:-20px; left:25px }
+
+.kaytava1,
+.kaytava2
+{
+    width: 380px;
+    height: 1px;
+    border: 2px solid black;
+    background-color: black;
+    position: absolute;
+
+}
+.kaytava1{ top:150px; left:20px }
+.kaytava2{top:315px; left:20px }
+
+
+.kaytava3,
+.kaytava4{
+    width: 1px;
+    height: 430px;
+    border: 2px solid black;
+    background-color: black;
+    position: absolute;
+}
+
+.kaytava3{ top:20px; left:280px }
+.kaytava4{ top:20px; left:135px }
+
+
+
+
+.hallintapaneeliteksti{
+   color: black;
+    position: absolute;
+}
+
+.hallintapaneeliteksti{ top:10px; left:440px }
+
+
+.hallinta{
+    width: 150px;
+    height: 380px;
+    border: 2px solid black;
+    background-color: white;
+    position: absolute;
+}
+
+.hallinta{ top:70px; left:430px }
+
+
+.luo_nappi{
+    color: white;
+    background-color: #535bf2;
+    position: absolute;
+    width: 120px;
+    height: 60px;
+}
+
+.luo_nappi{ top:30px; left: 15px }
+
+
+.poista_nappi{
+    color: white;
+    background-color: #535bf2;
+    position: absolute;
+    width: 120px;
+    height: 60px;
+}
+.poista_nappi{ top:120px; left: 15px }
+
+
+.paivytyksentila_teksti{
+    color: black;
+    position: absolute;
+}
+
+.paivytyksentila_teksti{top:200px; left:15px}
+
+
