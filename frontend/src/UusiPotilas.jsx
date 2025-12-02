@@ -25,7 +25,7 @@ export default function UusiPotilas({
 
                 <h2 style={styles.modalHeader}>Tuo potilas</h2>
 
-                {/* Valitse potilas */}
+
                 <select
                     style={styles.formField}
                     value={valittuId}
@@ -75,7 +75,7 @@ export default function UusiPotilas({
                     </button>
                 </div>
 
-                {/* Valitse paikka */}
+
                 <select
                     style={styles.formField}
                     value={valittuPaikka}

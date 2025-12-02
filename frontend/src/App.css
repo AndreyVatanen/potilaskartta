@@ -191,3 +191,51 @@
 
 .paivytyksentila_teksti{top:200px; left:15px}
 
+.paikka-potilas {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 6px;
+    background: white;
+    border-radius: 6px;
+}
+
+
+
+.potilas-teksti {
+    color: black;
+    font-weight: 600;
+    position: absolute;
+}
+
+.potilas-teksti{top:30px; left:5px }
+
+.triage-indicator {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.triage-indicator.A {
+    background: red;
+    position: absolute;
+
+}
+
+.triage-indicator.A{top:7px; left:80px }
+
+.triage-indicator.B {
+    background: yellow;
+    border: 1px solid #888;
+    position: absolute;
+}
+
+.triage-indicator.B{top:7px; left:80px }
+
+.triage-indicator.C {
+    background: green;
+    position: absolute;
+}
+
+.triage-indicator.C{top:7px; left:80px }
