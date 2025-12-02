@@ -4,9 +4,9 @@ import Typography from "@mui/material/Typography";
 import { PieChart } from "@mui/x-charts/PieChart";
 
 const platforms = [
-    { value: 15, label: "Odotusaula" },
+    { value: 15, label: "Päivystysosasto" },
     { value: 6, label: "Ambulanssi" },
-    { value: 9, label: "Päivystys" },
+    { value: 9, label: "Odotusaula" },
 ];
 
 const pieParams = {

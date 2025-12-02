@@ -53,7 +53,7 @@
 .paivystys_laatikko {
     width: 610px;
     height: 500px;
-    background-color: orange;
+    background-color: greenyellow;
     margin: 20px auto;
     position: relative;
 }
@@ -190,5 +190,4 @@
 }
 
 .paivytyksentila_teksti{top:200px; left:15px}
-
 
