@@ -14,6 +14,13 @@ export default function UusiPotilas({
     const [luokitus, setLuokitus] = useState("C");
     const [valittuPaikka, setValittuPaikka] = useState(1);
 
+    // 🔥 UUSI: potilaan sijainnin selvitys dropdownia varten
+    function haePotilaanSijainti(potilas) {
+        if (odottava.some(p => p.id === potilas.id)) return "odotusaula";
+        if (ambulanssi.some(p => p.id === potilas.id)) return "ambulanssi";
+        return "";
+    }
+
     function handleSave() {
         const potilas = kaikkiPotilaat.find(p => p.id === Number(valittuId));
         onTuoPotilas({ potilas, luokitus, paikka: valittuPaikka });
@@ -25,22 +32,22 @@ export default function UusiPotilas({
 
                 <h2 style={styles.modalHeader}>Tuo potilas</h2>
 
-
                 <select
                     style={styles.formField}
                     value={valittuId}
                     onChange={e => setValittuId(e.target.value)}
                 >
                     <option value="">Valitse potilas...</option>
+
                     {kaikkiPotilaat.map(p => (
                         <option key={p.id} value={p.id}>
-                            {p.etunimi} {p.sukunimi} ({p.ika})
+                            {p.etunimi} {p.sukunimi} ({p.ika}) ({haePotilaanSijainti(p)})
                         </option>
                     ))}
+
                 </select>
 
-
-                <div style={{display: "flex", gap: "10px", justifyContent: "center"}}>
+                <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
                     <button
                         style={{
                             ...styles.triageBtn,
@@ -74,7 +81,6 @@ export default function UusiPotilas({
                         C
                     </button>
                 </div>
-
 
                 <select
                     style={styles.formField}

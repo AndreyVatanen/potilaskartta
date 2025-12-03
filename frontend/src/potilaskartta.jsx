@@ -3,8 +3,10 @@ import './App.css'
 import Potilaslista from "./Potilaslista.jsx";
 import KuormitusData from "./KuormitusData.jsx";
 import UusiPotilas from "./UusiPotilas.jsx";
+import KotiutaPotilas from "./KotiutaPotilas.jsx";
 function Potilaskartta() {
     const [showModal, setShowModal] = useState(false);
+    const [showKotiuta, setShowKotiuta] = useState(false);
 
     const [odottava,setOdottava] = useState([
         {id: 1, etunimi: "Maija", sukunimi: "Mehiläinen", ika: 44 },
@@ -29,7 +31,7 @@ function Potilaskartta() {
         9: null
     });
 
-    // 🔥 TÄMÄ ON KOKO SOVELLUKSEN YDIN
+
     function handleTuoPotilas({ potilas, luokitus, paikka }) {
         if (!potilas) return;
 
@@ -44,6 +46,27 @@ function Potilaskartta() {
         setAmbulanssi(prev => prev.filter(p => p.id !== potilas.id));
 
         setShowModal(false);
+    }
+
+    function handleKotiuta({ potilas, teksti }) {
+        console.log("Kotiutettu:", potilas, "Tiivistelmä:", teksti);
+
+        // poista odottavat/ambulanssi-listasta
+        setOdottava(prev => prev.filter(p => p.id !== potilas.id));
+        setAmbulanssi(prev => prev.filter(p => p.id !== potilas.id));
+
+        // poista potilas paikoista
+        setPaikat(prev => {
+            const copy = { ...prev };
+            for (const key of Object.keys(copy)) {
+                if (copy[key]?.id === potilas.id) {
+                    copy[key] = null;
+                }
+            }
+            return copy;
+        });
+
+        setShowKotiuta(false);
     }
 
 
@@ -78,7 +101,7 @@ function Potilaskartta() {
           <div
               className="hallinta">
               <button className="luo_nappi" onClick={() => setShowModal(true)}>tuo potilas</button>
-              <button className="poista_nappi">kotiuta potilas</button>
+              <button className="poista_nappi" onClick={() => setShowKotiuta(true)}>kotiuta potilas</button>
               {showModal && (
                   <UusiPotilas
                       odottava={odottava}
@@ -89,6 +112,17 @@ function Potilaskartta() {
                   />
 
               )}
+              {showKotiuta && (
+                  <KotiutaPotilas
+                      odottava={odottava}
+                      ambulanssi={ambulanssi}
+                      paikat={paikat}
+                      onKotiuta={handleKotiuta}
+                      onClose={() => setShowKotiuta(false)}
+                  />
+              )}
+
+
               <h6 className="paivytyksentila_teksti">Päivystyksen kuormitus</h6>
               <div style={{ width: "200px", margin: "0 auto" }}>
                   <div style={{
