@@ -1,6 +1,9 @@
 package com.example.potilaskartta.Entiteetti;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 
 @Data
@@ -15,7 +18,7 @@ public class Potilas {
     private String hetu;
     private String nimi;
     private String sukunimi;
-    private String hoitoohje;
+
 
     // potilaalla on yksi kiireellisyysluokitus
     @Enumerated(EnumType.STRING)
@@ -25,5 +28,35 @@ public class Potilas {
     @JoinColumn(name = "paikka_id")
     private Paikka paikka;
 
+
+    @ManyToOne
+    @JoinColumn(name = "ambulanssi_id")
+    private Ambulanssi ambulanssi;
+
+    @ManyToOne
+    @JoinColumn(name = "odotusaula_id")
+    private Odotusaula odotusaula;
+
+
+    // potilaalla voi olla useampi diagnoosi
+    @OneToMany(mappedBy = "potilas", cascade = CascadeType.ALL)
+    @JsonManagedReference("diag-potilas")
+    private List<Diagnoosi> diagnoosit;
+
+    // potilaalla voi olla useampi lääke
+    @OneToMany(mappedBy = "potilas", cascade = CascadeType.ALL)
+    @JsonManagedReference("laake-potilas")
+    private List<Laakelista> laakkeet;
+
+    // potilaalla voi olla useampi eri hoi
+    @OneToMany(mappedBy = "potilas", cascade = CascadeType.ALL)
+    @JsonManagedReference("hoitoohje-potilas")
+    private List<Hoitoohje> hoito_ohje;
+
+
+    // potilaalla voi olla useampi jatkohoitosuunnitelma
+    @OneToMany(mappedBy = "potilas", cascade = CascadeType.ALL)
+    @JsonManagedReference("jatkohoito-potilas")
+    private List<Jatkohoito> jatko_hoito;
 
 }

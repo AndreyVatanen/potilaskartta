@@ -15,7 +15,7 @@ export default function KotiutaPotilas({
     const [valittuId, setValittuId] = useState("");
     const [kotiutusTeksti, setKotiutusTeksti] = useState("");
 
-    // 🔥 UUSI: potilaan sijainnin selvitys
+
     function haePotilaanSijainti(potilas) {
         if (odottava.some(p => p.id === potilas.id)) return "odotusaula";
         if (ambulanssi.some(p => p.id === potilas.id)) return "ambulanssi";
