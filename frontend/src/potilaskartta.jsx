@@ -4,10 +4,13 @@ import Potilaslista from "./Potilaslista.jsx";
 import KuormitusData from "./KuormitusData.jsx";
 import UusiPotilas from "./UusiPotilas.jsx";
 import KotiutaPotilas from "./KotiutaPotilas.jsx";
+import PotilasNakyma from "./PotilasNakyma.jsx";
+
+
 function Potilaskartta() {
     const [showModal, setShowModal] = useState(false);
     const [showKotiuta, setShowKotiuta] = useState(false);
-
+    const [naytaPotilas, setNaytaPotilas] = useState(null);
     const [odottava,setOdottava] = useState([
         {id: 1, etunimi: "Maija", sukunimi: "Mehiläinen", ika: 44 },
         {id: 2, etunimi: "Pekka", sukunimi: "Pouta", ika: 87 }
@@ -35,7 +38,13 @@ function Potilaskartta() {
     function handleTuoPotilas({ potilas, luokitus, paikka }) {
         if (!potilas) return;
 
-        const uusi = { ...potilas, luokitus };
+        const uusi = {
+            ...potilas,
+            luokitus,
+            laakkeet: potilas.laakkeet ?? [],
+            diagnoosit: potilas.diagnoosit ?? [],
+            jatkohoito: potilas.jatkohoito ?? ""
+        };
 
         setPaikat(prev => ({
             ...prev,
@@ -141,33 +150,87 @@ function Potilaskartta() {
               {paikat[1] && (
                   <div className="paikka-potilas">
                       <span className={`triage-indicator ${paikat[1].luokitus}`}></span>
-                      <span className="potilas-teksti">
-                {paikat[1].etunimi} {paikat[1].sukunimi}
-            </span>
+
+                      <span className="potilas-teksti" style={{ fontSize: "14px", fontWeight: "500" }}>
+            {paikat[1].etunimi} {paikat[1].sukunimi}
+        </span>
+
+                      <button
+                          style={{
+                              marginTop: "65px",
+                              padding: "4px 8px",
+                              fontSize: "12px",
+                              borderRadius: "6px",
+                              border: "none",
+                              background: "#007bff",
+                              color: "white",
+                              cursor: "pointer"
+                          }}
+                          onClick={() => setNaytaPotilas(paikat[1])}
+                      >
+                          potilastiedot
+                      </button>
                   </div>
               )}
+
 
           </div>
           <div className= "potilaspaikka2">
               <h6 className= "numero2">Paikka 2</h6>
+
               {paikat[2] && (
                   <div className="paikka-potilas">
                       <span className={`triage-indicator ${paikat[2].luokitus}`}></span>
-                      <span className="potilas-teksti">
-                {paikat[2].etunimi} {paikat[2].sukunimi}
-            </span>
+
+                      <span className="potilas-teksti" style={{ fontSize: "14px", fontWeight: "500" }}>
+            {paikat[2].etunimi} {paikat[2].sukunimi}
+        </span>
+
+                      <button
+                          style={{
+                              marginTop: "65px",
+                              padding: "4px 8px",
+                              fontSize: "12px",
+                              borderRadius: "6px",
+                              border: "none",
+                              background: "#007bff",
+                              color: "white",
+                              cursor: "pointer"
+                          }}
+                          onClick={() => setNaytaPotilas(paikat[2])}
+                      >
+                          potilastiedot
+                      </button>
                   </div>
               )}
 
           </div>
           <div className= "potilaspaikka3">
               <h6 className= "numero3">Paikka 3</h6>
+
               {paikat[3] && (
                   <div className="paikka-potilas">
                       <span className={`triage-indicator ${paikat[3].luokitus}`}></span>
-                      <span className="potilas-teksti">
-                {paikat[3].etunimi} {paikat[3].sukunimi}
-            </span>
+
+                      <span className="potilas-teksti" style={{ fontSize: "14px", fontWeight: "500" }}>
+            {paikat[3].etunimi} {paikat[3].sukunimi}
+        </span>
+
+                      <button
+                          style={{
+                              marginTop: "65px",
+                              padding: "4px 8px",
+                              fontSize: "12px",
+                              borderRadius: "6px",
+                              border: "none",
+                              background: "#007bff",
+                              color: "white",
+                              cursor: "pointer"
+                          }}
+                          onClick={() => setNaytaPotilas(paikat[3])}
+                      >
+                          potilastiedot
+                      </button>
                   </div>
               )}
 
@@ -175,12 +238,30 @@ function Potilaskartta() {
           </div>
           <div className= "potilaspaikka4">
               <h6 className= "numero4">Paikka 4</h6>
+
               {paikat[4] && (
                   <div className="paikka-potilas">
                       <span className={`triage-indicator ${paikat[4].luokitus}`}></span>
-                      <span className="potilas-teksti">
-                {paikat[4].etunimi} {paikat[4].sukunimi}
-            </span>
+
+                      <span className="potilas-teksti" style={{ fontSize: "14px", fontWeight: "500" }}>
+            {paikat[4].etunimi} {paikat[4].sukunimi}
+        </span>
+
+                      <button
+                          style={{
+                              marginTop: "65px",
+                              padding: "4px 8px",
+                              fontSize: "12px",
+                              borderRadius: "6px",
+                              border: "none",
+                              background: "#007bff",
+                              color: "white",
+                              cursor: "pointer"
+                          }}
+                          onClick={() => setNaytaPotilas(paikat[4])}
+                      >
+                          potilastiedot
+                      </button>
                   </div>
               )}
 
@@ -188,12 +269,30 @@ function Potilaskartta() {
           </div>
           <div className= "potilaspaikka5">
               <h6 className= "numero5">Paikka 5</h6>
+
               {paikat[5] && (
                   <div className="paikka-potilas">
                       <span className={`triage-indicator ${paikat[5].luokitus}`}></span>
-                      <span className="potilas-teksti">
-                {paikat[5].etunimi} {paikat[5].sukunimi}
-            </span>
+
+                      <span className="potilas-teksti" style={{ fontSize: "14px", fontWeight: "500" }}>
+            {paikat[5].etunimi} {paikat[5].sukunimi}
+        </span>
+
+                      <button
+                          style={{
+                              marginTop: "65px",
+                              padding: "4px 8px",
+                              fontSize: "12px",
+                              borderRadius: "6px",
+                              border: "none",
+                              background: "#007bff",
+                              color: "white",
+                              cursor: "pointer"
+                          }}
+                          onClick={() => setNaytaPotilas(paikat[5])}
+                      >
+                          potilastiedot
+                      </button>
                   </div>
               )}
 
@@ -201,12 +300,30 @@ function Potilaskartta() {
           </div>
           <div className= "potilaspaikka6">
               <h6 className= "numero6">Paikka 6</h6>
+
               {paikat[6] && (
                   <div className="paikka-potilas">
                       <span className={`triage-indicator ${paikat[6].luokitus}`}></span>
-                      <span className="potilas-teksti">
-                {paikat[6].etunimi} {paikat[6].sukunimi}
-            </span>
+
+                      <span className="potilas-teksti" style={{ fontSize: "14px", fontWeight: "500" }}>
+            {paikat[6].etunimi} {paikat[6].sukunimi}
+        </span>
+
+                      <button
+                          style={{
+                              marginTop: "65px",
+                              padding: "4px 8px",
+                              fontSize: "12px",
+                              borderRadius: "6px",
+                              border: "none",
+                              background: "#007bff",
+                              color: "white",
+                              cursor: "pointer"
+                          }}
+                          onClick={() => setNaytaPotilas(paikat[6])}
+                      >
+                          potilastiedot
+                      </button>
                   </div>
               )}
 
@@ -215,12 +332,30 @@ function Potilaskartta() {
           </div>
           <div className= "potilaspaikka7">
               <h6 className= "numero7">Paikka 7</h6>
+
               {paikat[7] && (
                   <div className="paikka-potilas">
                       <span className={`triage-indicator ${paikat[7].luokitus}`}></span>
-                      <span className="potilas-teksti">
-                {paikat[7].etunimi} {paikat[7].sukunimi}
-            </span>
+
+                      <span className="potilas-teksti" style={{ fontSize: "14px", fontWeight: "500" }}>
+            {paikat[7].etunimi} {paikat[7].sukunimi}
+        </span>
+
+                      <button
+                          style={{
+                              marginTop: "65px",
+                              padding: "4px 8px",
+                              fontSize: "12px",
+                              borderRadius: "6px",
+                              border: "none",
+                              background: "#007bff",
+                              color: "white",
+                              cursor: "pointer"
+                          }}
+                          onClick={() => setNaytaPotilas(paikat[7])}
+                      >
+                          potilastiedot
+                      </button>
                   </div>
               )}
 
@@ -229,12 +364,30 @@ function Potilaskartta() {
           </div>
           <div className= "potilaspaikka8">
               <h6 className= "numero8">Paikka 8</h6>
+
               {paikat[8] && (
                   <div className="paikka-potilas">
                       <span className={`triage-indicator ${paikat[8].luokitus}`}></span>
-                      <span className="potilas-teksti">
-                {paikat[8].etunimi} {paikat[8].sukunimi}
-            </span>
+
+                      <span className="potilas-teksti" style={{ fontSize: "14px", fontWeight: "500" }}>
+            {paikat[8].etunimi} {paikat[8].sukunimi}
+        </span>
+
+                      <button
+                          style={{
+                              marginTop: "65px",
+                              padding: "4px 8px",
+                              fontSize: "12px",
+                              borderRadius: "6px",
+                              border: "none",
+                              background: "#007bff",
+                              color: "white",
+                              cursor: "pointer"
+                          }}
+                          onClick={() => setNaytaPotilas(paikat[8])}
+                      >
+                          potilastiedot
+                      </button>
                   </div>
               )}
 
@@ -244,19 +397,45 @@ function Potilaskartta() {
           <div className= "potilaspaikka9">
               <h6 className= "numero9">Paikka 9</h6>
 
+
               {paikat[9] && (
                   <div className="paikka-potilas">
                       <span className={`triage-indicator ${paikat[9].luokitus}`}></span>
-                      <span className="potilas-teksti">
-                {paikat[9].etunimi} {paikat[9].sukunimi}
-            </span>
+
+                      <span className="potilas-teksti" style={{ fontSize: "14px", fontWeight: "500" }}>
+            {paikat[9].etunimi} {paikat[9].sukunimi}
+        </span>
+
+                      <button
+                          style={{
+                              marginTop: "65px",
+                              padding: "4px 8px",
+                              fontSize: "12px",
+                              borderRadius: "6px",
+                              border: "none",
+                              background: "#007bff",
+                              color: "white",
+                              cursor: "pointer"
+                          }}
+                          onClick={() => setNaytaPotilas(paikat[9])}
+                      >
+                          potilastiedot
+                      </button>
                   </div>
               )}
 
-
           </div>
       </div>
+          {naytaPotilas && (
+              <PotilasNakyma
+                  potilas={naytaPotilas}
+                  onClose={() => setNaytaPotilas(null)}
+              />
+          )}
+
       </>
+
+
   );
 }
 
