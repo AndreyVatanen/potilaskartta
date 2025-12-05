@@ -18,9 +18,9 @@ public class PaikkaControlleri {
         return paikkaService.uusiPaikka(paikka);
     }
 
-    @PostMapping("/vie/{paikkaId}")
-    public Paikka viePotilasPaikalle(@PathVariable Long paikkaId, @RequestBody Potilas potilas) {
-        return paikkaService.viepotilasPaikalle(paikkaId,potilas);
+    @PostMapping("/vie/{paikkaId}/{potilasId}")
+    public Paikka viePotilasPaikalle(@PathVariable Long paikkaId, @PathVariable Long potilasId) {
+        return paikkaService.viepotilasPaikalle(paikkaId,potilasId);
     }
 
 

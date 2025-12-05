@@ -13,7 +13,7 @@ public class Ambulanssi {
     Long Id;
 
 
-    // ambulanssi voi tuoda useita potilaita
+    // ambulanssin tuomia potilaita voi olla monta
     @OneToMany(mappedBy = "ambulanssi")
     private List<Potilas> potilaat;
 

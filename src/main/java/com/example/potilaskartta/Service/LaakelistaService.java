@@ -6,7 +6,6 @@ import com.example.potilaskartta.Repo.PotilasRepo;
 import jakarta.persistence.Access;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -18,9 +17,13 @@ public class LaakelistaService {
     @Autowired
     PotilasRepo potilasRepo;
 
+    // lisataan potilaalle henkilkohtaisia lääkkeitä
+    public Laakelista lisaaLaake(Laakelista laake, Long potilasId) {
+        Potilas potilas = potilasRepo.findById(potilasId).orElseThrow(() -> new RuntimeException("Potilasta ei löytynyt"));
+        List<Laakelista> laakkeet = potilas.getLaakkeet();
+        laakkeet.add(laake);
 
-    public Laakelista lisaaLaake(Laakelista laakelista) {
-        return laakelistaRepo.save(laakelista);
+        return laakelistaRepo.save(laake);
     }
 
     public boolean poistaLaake(Long laakeId) {
@@ -32,8 +35,8 @@ public class LaakelistaService {
     }
 
     // potilaskohtaiset lääkkeet listana:
-    public List<Laakelista> naytaLaakkeet(Long asiakasId) {
-        Potilas potilas = potilasRepo.findById(asiakasId).orElseThrow(() -> new RuntimeException("Potilasta ei löytynyt"));
+    public List<Laakelista> naytaLaakkeet(Long potilasId) {
+        Potilas potilas = potilasRepo.findById(potilasId).orElseThrow(() -> new RuntimeException("Potilasta ei löytynyt"));
 
         // parempi tarkistus tähän, virheenheittoa yms.
         List<Laakelista> laakkeet = potilas.getLaakkeet();

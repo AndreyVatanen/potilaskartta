@@ -15,9 +15,9 @@ public class Potilas {
     Long Id;
 
 
-    private String hetu;
     private String nimi;
     private String sukunimi;
+    private int ika;
 
 
     // potilaalla on yksi kiireellisyysluokitus
