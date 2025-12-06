@@ -1,0 +1,4 @@
+DELETE http://localhost:8080/api/hoitoohje/poista/2
+Content-Type: application/json
+
+###

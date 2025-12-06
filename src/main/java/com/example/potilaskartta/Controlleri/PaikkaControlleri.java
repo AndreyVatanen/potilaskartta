@@ -5,6 +5,8 @@ import com.example.potilaskartta.Service.PaikkaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/paikka")
 public class PaikkaControlleri {
@@ -21,6 +23,12 @@ public class PaikkaControlleri {
     @PostMapping("/vie/{paikkaId}/{potilasId}")
     public Paikka viePotilasPaikalle(@PathVariable Long paikkaId, @PathVariable Long potilasId) {
         return paikkaService.viepotilasPaikalle(paikkaId,potilasId);
+    }
+
+
+    @GetMapping("/osastopotilaat/{paivystysId}")
+    public List<Paikka> Naytapaikat(@PathVariable Long paivystysId) {
+        return null;
     }
 
 

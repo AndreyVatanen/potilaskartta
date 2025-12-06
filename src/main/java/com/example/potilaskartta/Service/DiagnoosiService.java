@@ -18,10 +18,16 @@ public class DiagnoosiService {
     PotilasRepo potilasRepo;
 
 
-    public Diagnoosi lisaaDiagnoosi(Diagnoosi diagnoosi) {
+    public Diagnoosi lisaaDiagnoosi(Long potilasId, Diagnoosi diagnoosi) {
+        Potilas potilas = potilasRepo.findById(potilasId).orElseThrow(() -> new RuntimeException("Potilasta ei löytynyt"));
+
+        diagnoosi.setPotilas(potilas);
+        potilas.getDiagnoosit().add(diagnoosi);
+
         return diagnoosiRepo.save(diagnoosi);
     }
 
+    // muokattava
     public boolean poistaDiagnoosi(Long diagnoosiId) {
         if (diagnoosiRepo.existsById(diagnoosiId)) {
             diagnoosiRepo.deleteById(diagnoosiId);
@@ -33,7 +39,6 @@ public class DiagnoosiService {
 
     public List<Diagnoosi> kaikkiDiagnoosit(Long potilasId) {
         Potilas potilas = potilasRepo.findById(potilasId).orElseThrow(() -> new RuntimeException("Potilasta ei löytynyt"));
-
         List<Diagnoosi> diagnoosit = potilas.getDiagnoosit();
         return diagnoosit;
 

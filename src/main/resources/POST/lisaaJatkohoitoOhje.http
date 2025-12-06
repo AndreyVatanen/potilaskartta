@@ -1,0 +1,7 @@
+POST http://localhost:8080/api/jatkohoito/lisaa/1
+Content-Type: application/json
+
+{
+  "jatkohoito_ohje": "osastolle hetkeksi"
+}
+###

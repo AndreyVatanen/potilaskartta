@@ -1,0 +1,7 @@
+POST http://localhost:8080/api/paikka/luo
+Content-Type: application/json
+
+{
+  "paikkanumero": 1
+}
+###

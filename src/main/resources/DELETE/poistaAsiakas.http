@@ -1,5 +1,4 @@
-### GET request to example server
-GET https://examples.http-client.intellij.net/get
-    ?generated-in=IntelliJ IDEA
+DELETE http://localhost:8080/api/potilas/poista/1
+Content-Type: application/json
 
 ###

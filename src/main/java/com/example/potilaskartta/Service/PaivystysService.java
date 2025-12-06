@@ -1,7 +1,10 @@
 package com.example.potilaskartta.Service;
 import com.example.potilaskartta.Entiteetti.Henkilokunta;
+import com.example.potilaskartta.Entiteetti.Paivystys;
 import com.example.potilaskartta.Entiteetti.Potilas;
 import com.example.potilaskartta.Repo.HenkilokuntaRepo;
+import com.example.potilaskartta.Repo.PaikkaRepo;
+import com.example.potilaskartta.Repo.PaivystysRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +12,23 @@ import java.util.List;
 
 @Service
 public class PaivystysService {
+
+    @Autowired
+   PaivystysRepo paivystysRepo;
+
+
+
+    public Paivystys luoPaivystys(Paivystys paivystys) {
+        return paivystysRepo.save(paivystys);
+    }
+
+    public boolean poistaPaivystys(Long paivystysId) {
+        if (paivystysRepo.existsById(paivystysId)) {
+            paivystysRepo.deleteById(paivystysId);
+            return true;
+        }
+        return false;
+    }
 
 
     public double laskeruuhkaTilanne(List<Potilas> potilaat, List<Henkilokunta> tyontekijat) {

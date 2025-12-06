@@ -1,9 +1,11 @@
 package com.example.potilaskartta.Entiteetti;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import lombok.Data;
 
 
 @Entity
+@Data
 public class Laakelista {
 
     @Id

@@ -1,5 +1,7 @@
-### GET request to example server
-GET https://examples.http-client.intellij.net/get
-    ?generated-in=IntelliJ IDEA
+POST http://localhost:8080/api/laakelista/lisaa/1
+Content-Type: application/json
 
+{
+  "nimi": "Burana 400mg x3 tbl / vrk"
+}
 ###

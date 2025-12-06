@@ -1,6 +1,7 @@
 package com.example.potilaskartta.Service;
 import com.example.potilaskartta.Entiteetti.Paikka;
 import com.example.potilaskartta.Entiteetti.Potilas;
+import com.example.potilaskartta.Repo.OdotusaulaRepo;
 import com.example.potilaskartta.Repo.PaikkaRepo;
 import com.example.potilaskartta.Repo.PotilasRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,8 @@ public class PotilasService {
     public List<Potilas> NaytaPotilaat() {
         return potilasRepo.findAll();
     }
+
+
 
     public Integer potilaidenMaara() {
         List<Potilas> potilaat = potilasRepo.findAll();
