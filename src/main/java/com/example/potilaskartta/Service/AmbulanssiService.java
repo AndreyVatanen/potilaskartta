@@ -15,15 +15,16 @@ public class AmbulanssiService {
     @Autowired
     PotilasRepo potilasRepo;
 
-    public Potilas lisaaAmbulanssiListaan(Long potilasId, Long ambulanssiId) {
+    public Ambulanssi lisaaAmbulanssiListaan(Long potilasId, Long ambulanssiId) {
         Potilas potilas = potilasRepo.findById(potilasId).orElseThrow(() -> new RuntimeException("potilasta ei löytynyt"));
         Ambulanssi ambulanssi = ambulanssiRepo.findById(ambulanssiId).orElseThrow(() -> new RuntimeException("ambulanssilistaa ei löytynyt"));
 
         potilas.setAmbulanssi(ambulanssi);
+        ambulanssi.getPotilaat().add(potilas);
         potilas.setPaikka(null);
         potilas.setOdotusaula(null);
 
-        return potilasRepo.save(potilas);
+        return ambulanssiRepo.save(ambulanssi);
 
     }
 

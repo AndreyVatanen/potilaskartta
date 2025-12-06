@@ -1,0 +1,7 @@
+POST http://localhost:8080/api/diagnoosi/lisaa/2
+Content-Type: application/json
+
+{
+  "diagnoosinimi": "keuhkokuume"
+}
+###

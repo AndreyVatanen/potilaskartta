@@ -4,9 +4,7 @@ Content-Type: application/json
 {
   "nimi": "Pekka",
   "sukunimi": "Jormanainen",
-  "ika": 87
+  "ika": 87,
+  "kiireellisyys": "VIHREA"
+
 }
-
-###
-
-###

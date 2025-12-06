@@ -1,0 +1,7 @@
+POST http://localhost:8080/api/hoitoohje/lisaa/1
+Content-Type: application/json
+
+{
+  "ohje": "lepo, seurantalinja. Uusi tarkistus 4vk kuluttua."
+}
+###

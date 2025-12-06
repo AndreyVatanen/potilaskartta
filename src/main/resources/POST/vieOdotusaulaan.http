@@ -1,0 +1,5 @@
+POST http://localhost:8080/api/odotusaula/lisaa_aulaan/2/1
+Content-Type: application/json
+
+
+###

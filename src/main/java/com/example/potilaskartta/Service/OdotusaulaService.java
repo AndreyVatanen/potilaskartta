@@ -17,10 +17,18 @@ public class OdotusaulaService {
     PotilasRepo potilasRepo;
 
 
+    public Odotusaula luoOodotusAula(Odotusaula odotusaula) {
+        return odotusaulaRepo.save(odotusaula);
+    }
+
+
+
     public Potilas lisaapotilasAulaListaan(Long potilasId, Long odotusaulaId) {
         Potilas potilas = potilasRepo.findById(potilasId).orElseThrow(() -> new RuntimeException("potilasta ei löytynyt"));
         Odotusaula odotusaula = odotusaulaRepo.findById(odotusaulaId).orElseThrow(() -> new RuntimeException("potilasta ei löytynyt"));
+
         potilas.setOdotusaula(odotusaula);
+        odotusaula.getPotilaat().add(potilas);
 
         // potilas ei voi olla muissa paikoissa samaan aikaan -> asetetaan null
         potilas.setAmbulanssi(null);
@@ -39,4 +47,12 @@ public class OdotusaulaService {
         return false;
     }
 
+
+    public boolean poistaOodotusaula(Long odotusaulaId) {
+        if (odotusaulaRepo.existsById(odotusaulaId)) {
+            odotusaulaRepo.deleteById(odotusaulaId);
+            return true;
+        }
+        return false;
+    }
 }

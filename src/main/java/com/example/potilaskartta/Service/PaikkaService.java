@@ -20,6 +20,9 @@ public class PaikkaService {
         return  paikkaRepo.save(paikka);
     }
 
+
+    // potilas viedään paikalle aulasta, tai ennakkoilmoitettujen potilaiden listalta, pitää muuttaa tietokannan toimintaan vielä tuo, että
+    // siirron yhteyessä tarkistus kummassa on -> poistetaan joko aulasta tai ambulanssikartalta -> siirto potilaspaikalle.
     public Paikka viepotilasPaikalle(Long paikkaId, Long potilasId) {
         Paikka paikka = paikkaRepo.findById(paikkaId).orElseThrow(() -> new RuntimeException("paikkaa ei löytynyt"));
         Potilas potilas = potilasRepo.findById(potilasId).orElseThrow(() -> new RuntimeException("potilasta ei löytynyt"));
@@ -27,7 +30,10 @@ public class PaikkaService {
         potilas.setOdotusaula(null);
         potilas.setAmbulanssi(null);
 
+
         paikka.setPotilas(potilas);
+        potilas.getPaikka().setPotilas(potilas);
+
         return  paikkaRepo.save(paikka);
     }
 

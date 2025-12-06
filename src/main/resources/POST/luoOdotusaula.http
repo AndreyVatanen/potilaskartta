@@ -1,0 +1,7 @@
+POST http://localhost:8080/api/odotusaula/lisaa
+Content-Type: application/json
+
+{
+  "nimi": "Aula 1"
+}
+###

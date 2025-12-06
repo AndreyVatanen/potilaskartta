@@ -18,10 +18,11 @@ public class LaakelistaService {
     PotilasRepo potilasRepo;
 
     // lisataan potilaalle henkilkohtaisia lääkkeitä
-    public Laakelista lisaaLaake(Laakelista laake, Long potilasId) {
+    public Laakelista lisaaLaake(Long potilasId, Laakelista laake) {
         Potilas potilas = potilasRepo.findById(potilasId).orElseThrow(() -> new RuntimeException("Potilasta ei löytynyt"));
-        List<Laakelista> laakkeet = potilas.getLaakkeet();
-        laakkeet.add(laake);
+
+        potilas.getLaakkeet().add(laake);
+        laake.setPotilas(potilas);
 
         return laakelistaRepo.save(laake);
     }

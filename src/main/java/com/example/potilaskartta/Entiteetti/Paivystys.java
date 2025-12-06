@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,13 +23,13 @@ public class Paivystys {
     // päivystyksessä on useita paikkoja
     @OneToMany(mappedBy = "paivystys")
     @JsonIgnore
-    List<Paikka> paikat;
+    List<Paikka> paikat = new ArrayList<>();
 
 
     // päivystyksessä on useita henkilöitä töissä
     @OneToMany(mappedBy = "paivystys")
     @JsonIgnore
-    List<Henkilokunta> tyontekijat;
+    List<Henkilokunta> tyontekijat = new ArrayList<>();
 
 
 }
