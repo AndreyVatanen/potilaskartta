@@ -1,7 +1,7 @@
-POST http://localhost:8080/api/paikka/luo
+POST http://localhost:8080/api/paikka/luo_paikka/1
 Content-Type: application/json
 
 {
-  "paikkanumero": 1
+  "paikkanumero": 9
 }
 ###

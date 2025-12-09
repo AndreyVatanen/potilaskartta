@@ -1,4 +1,5 @@
 package com.example.potilaskartta.Entiteetti;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -16,7 +17,7 @@ public class Paikka {
 
 
     @OneToOne(mappedBy = "paikka")
-    @JsonIgnore
+    @JsonBackReference("paikka-potilas")
     Potilas potilas;
 
     @ManyToOne

@@ -1,6 +1,7 @@
 package com.example.potilaskartta.Service;
 
 
+import com.example.potilaskartta.Entiteetti.Hoitoohje;
 import com.example.potilaskartta.Entiteetti.Jatkohoito;
 import com.example.potilaskartta.Entiteetti.Potilas;
 import com.example.potilaskartta.Repo.JatkohoitoRepo;
@@ -30,13 +31,26 @@ public class JatkohoitoService {
     }
 
 
-    // logiikka samaksi kun hoitoohjeessa
+
     public boolean poistaJatkohoito(Long jatkohoitoId) {
-        if (jatkohoitoRepo.existsById(jatkohoitoId)) {
-            jatkohoitoRepo.deleteById(jatkohoitoId);
-            return true;
-        }
+
+        Jatkohoito jatkohoito = jatkohoitoRepo.findById(jatkohoitoId)
+                .orElseThrow(() -> new RuntimeException("Hoito-ohjetta ei löytynyt"));
+        Potilas potilas = jatkohoito.getPotilas();
+
+        potilas.getJatko_hoito().remove(jatkohoito);
+        jatkohoito.setPotilas(null);
+
+        potilasRepo.save(potilas);
+        jatkohoitoRepo.delete(jatkohoito);
         return false;
 
+    }
+
+
+    public List<Jatkohoito> haeJatkohoito(Long potilasId) {
+        Potilas potilas = potilasRepo.findById(potilasId).orElseThrow(() -> new RuntimeException("Potilasta ei löytynyt"));
+        List<Jatkohoito> jatkohoidot = potilas.getJatko_hoito();
+        return jatkohoidot;
     }
 }

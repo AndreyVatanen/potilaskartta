@@ -21,12 +21,32 @@ public class PotilasService {
         return potilasRepo.save(potilas);
     }
 
-    public boolean poistaPotilas(Long potilasId) {
-        if (potilasRepo.existsById(potilasId)) {
-            potilasRepo.deleteById(potilasId);
-            return true;
+    public void poistaPotilas(Long potilasId) {
+        Potilas potilas = potilasRepo.findById(potilasId)
+                .orElseThrow(() -> new RuntimeException("Potilasta ei löytynyt"));
+
+        // irrota paikasta
+        if (potilas.getPaikka() != null) {
+            Paikka paikka = potilas.getPaikka();
+            paikka.setPotilas(null);
+            potilas.setPaikka(null);
         }
-        return false;
+
+        // irrota ambulanssista
+        if (potilas.getAmbulanssi() != null) {
+            potilas.getAmbulanssi().getPotilaat().remove(potilas);
+            potilas.setAmbulanssi(null);
+        }
+
+        // irrota odotusaulasta
+        if (potilas.getOdotusaula() != null) {
+            potilas.getOdotusaula().getPotilaat().remove(potilas);
+            potilas.setOdotusaula(null);
+        }
+
+        // lopuksi poista potilas kokonaan
+        potilasRepo.delete(potilas);
+
     }
 
     public List<Potilas> NaytaPotilaat() {

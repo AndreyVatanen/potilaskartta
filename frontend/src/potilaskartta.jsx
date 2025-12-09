@@ -1,5 +1,5 @@
-import { useState } from 'react'
 import './App.css'
+import { useState, useEffect } from "react";
 import Potilaslista from "./Potilaslista.jsx";
 import KuormitusData from "./KuormitusData.jsx";
 import UusiPotilas from "./UusiPotilas.jsx";
@@ -11,15 +11,95 @@ function Potilaskartta() {
     const [showModal, setShowModal] = useState(false);
     const [showKotiuta, setShowKotiuta] = useState(false);
     const [naytaPotilas, setNaytaPotilas] = useState(null);
-    const [odottava,setOdottava] = useState([
-        {id: 1, etunimi: "Maija", sukunimi: "Mehiläinen", ika: 44 },
-        {id: 2, etunimi: "Pekka", sukunimi: "Pouta", ika: 87 }
-    ]);
+    const [odottava, setOdottava] = useState([]);
+    const [ambulanssi, setAmbulanssi] = useState([]);
 
-    const [ambulanssi, setAmbulanssi] = useState([
-        {id: 3, etunimi: "Jouni", sukunimi: "Jokelainen", ika: 55 },
-        {id: 4, etunimi: "Senja", sukunimi: "Seijalainen", ika: 87 }
-    ]);
+
+    useEffect(() => {
+        async function haeOdotusaula() {
+            try {
+                const response = await fetch("http://localhost:8080/api/odotusaula/kaikki/1");
+                if (!response.ok) {
+                    throw new Error("Virhe " + response.status);
+                }
+                const data = await response.json();
+
+
+                const normalized = data.map(p => ({
+                    ...p,
+                    id: p.id ?? p.Id
+                }));
+
+                setOdottava(normalized);
+
+
+            } catch (err) {
+                console.error("Virhe haettaessa:", err);
+            }
+        }
+
+        haeOdotusaula();
+    }, []);
+
+
+    useEffect(() => {
+        async function haeAmbulanssi() {
+            try {
+                const response = await fetch("http://localhost:8080/api/ambulanssi/kaikki/1");
+                if (!response.ok) {
+                    throw new Error("Virhe " + response.status);
+                }
+                const data = await response.json();
+
+                const normalized = data.map(p => ({
+                    ...p,
+                    id: p.id ?? p.Id
+                }));
+
+                setAmbulanssi(normalized);
+
+
+            } catch (err) {
+                console.error("Virhe haettaessa:", err);
+            }
+        }
+
+        haeAmbulanssi();
+    }, []);
+
+
+    //-----------
+
+    useEffect(() => {
+        async function haePaikat() {
+            const res = await fetch("http://localhost:8080/api/paikka/osastopotilaat/1");
+            const data = await res.json();
+
+            const paikatObj = {
+                1: null, 2: null, 3: null, 4: null,
+                5: null, 6: null, 7: null, 8: null, 9: null
+            };
+
+            data.forEach(p => {
+                const nro = p.paikka?.paikkanumero;
+                if (nro) {
+                    paikatObj[nro] = {
+                        ...p,
+                        id: p.Id,
+                        luokitus: p.kiireellisyys
+                    };
+                }
+            });
+
+            setPaikat(paikatObj);
+        }
+
+        haePaikat();
+    }, []);
+
+
+
+
 
 
     const [paikat, setPaikat] = useState({
@@ -34,37 +114,70 @@ function Potilaskartta() {
         9: null
     });
 
-
-    function handleTuoPotilas({ potilas, luokitus, paikka }) {
-        if (!potilas) return;
-
-        const uusi = {
-            ...potilas,
-            luokitus,
-            laakkeet: potilas.laakkeet ?? [],
-            diagnoosit: potilas.diagnoosit ?? [],
-            jatkohoito: potilas.jatkohoito ?? ""
-        };
-
-        setPaikat(prev => ({
-            ...prev,
-            [paikka]: uusi
-        }));
-
-        setOdottava(prev => prev.filter(p => p.id !== potilas.id));
-        setAmbulanssi(prev => prev.filter(p => p.id !== potilas.id));
-
-        setShowModal(false);
+    function mapLuokitus(l) {
+        if (l === "A") return "PUNAINEN";
+        if (l === "B") return "KELTAINEN";
+        return "VIHREA";
     }
 
-    function handleKotiuta({ potilas, teksti }) {
-        console.log("Kotiutettu:", potilas, "Tiivistelmä:", teksti);
+    async function handleTuoPotilas({ potilas, luokitus, paikka }) {
+        if (!potilas) return;
 
-        // poista odottavat/ambulanssi-listasta
+        try {
+
+            await fetch(
+                `http://localhost:8080/api/kiireellisyys/muokkaa/${potilas.id}`,
+                {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(mapLuokitus(luokitus))
+                }
+            );
+
+
+            await fetch(
+                `http://localhost:8080/api/paikka/vie/${paikka}/${potilas.id}`,
+                { method: "POST" }
+            );
+
+            const uusi = {
+                ...potilas,
+                luokitus: mapLuokitus(luokitus),
+                paikka
+            };
+
+            setPaikat(prev => ({ ...prev, [paikka]: uusi }));
+            setOdottava(prev => prev.filter(p => p.id !== potilas.id));
+            setAmbulanssi(prev => prev.filter(p => p.id !== potilas.id));
+            setShowModal(false);
+
+        } catch (err) {
+            console.error(err);
+            alert("Virhe potilaan tuonnissa");
+        }
+    }
+
+
+
+
+
+
+
+    async function handleKotiuta({ potilas, teksti }) {
+        try {
+            await fetch(
+                `http://localhost:8080/api/potilas/poista/${potilas.id}`,
+                { method: "DELETE" }
+            );
+        } catch (err) {
+            alert("Virhe kotiutuksessa");
+            return;
+        }
+
+        // poista frontend-tilasta
         setOdottava(prev => prev.filter(p => p.id !== potilas.id));
         setAmbulanssi(prev => prev.filter(p => p.id !== potilas.id));
 
-        // poista potilas paikoista
         setPaikat(prev => {
             const copy = { ...prev };
             for (const key of Object.keys(copy)) {
@@ -164,7 +277,9 @@ function Potilaskartta() {
                               border: "none",
                               background: "#007bff",
                               color: "white",
-                              cursor: "pointer"
+                              cursor: "pointer",
+                              //tähän parempi asetelma napin sijaintiin?
+
                           }}
                           onClick={() => setNaytaPotilas(paikat[1])}
                       >

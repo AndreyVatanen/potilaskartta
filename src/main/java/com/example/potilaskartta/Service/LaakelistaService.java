@@ -17,7 +17,7 @@ public class LaakelistaService {
     @Autowired
     PotilasRepo potilasRepo;
 
-    // lisataan potilaalle henkilkohtaisia lääkkeitä
+
     public Laakelista lisaaLaake(Long potilasId, Laakelista laake) {
         Potilas potilas = potilasRepo.findById(potilasId).orElseThrow(() -> new RuntimeException("Potilasta ei löytynyt"));
 
@@ -28,13 +28,26 @@ public class LaakelistaService {
     }
 
 
-    // logiikka samaksi kun hoitoohjeessa
+
     public boolean poistaLaake(Long laakeId) {
-        if (laakelistaRepo.existsById(laakeId)) {
-           laakelistaRepo.deleteById(laakeId);
-           return true;
-        }
-        return false;
+        Laakelista laake = laakelistaRepo.findById(laakeId)
+                .orElseThrow(() -> new RuntimeException("Lääkettä ei löytynyt"));
+
+        Potilas potilas = laake.getPotilas();
+
+
+        potilas.getLaakkeet().remove(laake);
+
+
+        laake.setPotilas(null);
+
+
+        potilasRepo.save(potilas);
+
+
+        laakelistaRepo.delete(laake);
+
+        return true;
     }
 
     // potilaskohtaiset lääkkeet listana:

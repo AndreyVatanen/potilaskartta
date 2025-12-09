@@ -1,14 +1,12 @@
 package com.example.potilaskartta.Controlleri;
-
-
 import com.example.potilaskartta.Entiteetti.Ambulanssi;
 import com.example.potilaskartta.Entiteetti.Potilas;
 import com.example.potilaskartta.Service.AmbulanssiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/api/ambulanssi")
 public class AmbulanssiController {
@@ -31,7 +29,6 @@ public class AmbulanssiController {
     public List<Potilas> naytaKaikki(@PathVariable Long ambulanssiId) {
         return ambulanssiService.naytaKaikki(ambulanssiId);
     }
-
 
 
     @DeleteMapping("/poista/{potilasId}")

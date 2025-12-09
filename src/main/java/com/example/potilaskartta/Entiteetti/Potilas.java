@@ -28,6 +28,7 @@ public class Potilas {
 
     @OneToOne // yksi potilas per paikka
     @JoinColumn(name = "paikka_id")
+    @JsonManagedReference("paikka-potilas")
     private Paikka paikka;
 
 

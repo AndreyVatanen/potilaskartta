@@ -2,9 +2,8 @@ POST http://localhost:8080/api/potilas/lisaa
 Content-Type: application/json
 
 {
-  "nimi": "Mirva",
-  "sukunimi": "Solehmainen",
-  "ika": 55,
-  "kiireellisyys": "PUNAINEN"
+  "nimi": "Jonne",
+  "sukunimi": "Laatikainen",
+  "ika": 40
 
 }

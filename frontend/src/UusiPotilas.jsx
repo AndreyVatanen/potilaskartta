@@ -40,7 +40,7 @@ export default function UusiPotilas({
                     <option value="">Valitse potilas...</option>
 
                     {kaikkiPotilaat.map(p => (
-                        <option key={p.id} value={p.id}>
+                        <option key={`potilas-${p.id}`} value={p.id}>
                             {p.etunimi} {p.sukunimi} ({p.ika}) ({haePotilaanSijainti(p)})
                         </option>
                     ))}
@@ -88,7 +88,7 @@ export default function UusiPotilas({
                     onChange={e => setValittuPaikka(Number(e.target.value))}
                 >
                     {Object.keys(paikat).map(numero => (
-                        <option key={numero} value={numero}>
+                        <option key={`paikka-${numero}`} value={numero}>
                             Paikka {numero}
                         </option>
                     ))}

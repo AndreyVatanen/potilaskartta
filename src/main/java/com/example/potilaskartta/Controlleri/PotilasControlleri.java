@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/api/potilas")
 public class PotilasControlleri {
@@ -18,15 +19,13 @@ public class PotilasControlleri {
    }
 
    @DeleteMapping("/poista/{potilasId}")
-    public boolean poistaPotilas(@PathVariable Long potilasId) {
-       return potilasService.poistaPotilas(potilasId);
+    public void poistaPotilas(@PathVariable Long potilasId) {
+      potilasService.poistaPotilas(potilasId);
     }
     @GetMapping("/kaikki")
     public List<Potilas> NaytaPotilaat(){
            return  potilasService.NaytaPotilaat();
     }
-
-
 
     @GetMapping("/maara")
     public Integer potilaidenMaara() {

@@ -49,4 +49,11 @@ public class HoitoohjeService {
         return true;
     }
 
+
+    public List<Hoitoohje> haehoitoohje(Long potilasId) {
+        Potilas potilas = potilasRepo.findById(potilasId).orElseThrow(() -> new RuntimeException("Potilasta ei löytynyt"));
+        List<Hoitoohje> hoitoohjeet = potilas.getHoito_ohje();
+        return hoitoohjeet;
+    }
+
 }

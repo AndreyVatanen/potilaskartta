@@ -6,6 +6,9 @@ import com.example.potilaskartta.Service.JatkohoitoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/api/jatkohoito")
 public class JatkohoitoController {
@@ -19,8 +22,15 @@ public class JatkohoitoController {
         return jatkohoitoService.lisaaJatkoihoitoSuunnitelma(potilasId, jatkohoito);
     }
 
+
+
     @DeleteMapping("/poista/{jatkohoitoId}")
     public boolean poistaJatkohoito( @PathVariable Long jatkohoitoId) {
         return jatkohoitoService.poistaJatkohoito(jatkohoitoId);
+    }
+
+    @GetMapping("/hae/jatkohoito/{potilasId}")
+    public List<Jatkohoito> haeJatkohoito(@PathVariable Long potilasId) {
+        return jatkohoitoService.haeJatkohoito(potilasId);
     }
 }

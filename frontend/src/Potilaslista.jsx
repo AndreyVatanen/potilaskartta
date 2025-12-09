@@ -3,10 +3,10 @@ import { DataGrid } from '@mui/x-data-grid';
 
 export default function Potilaslista({ rows, onSelect }) {
     const columns = [
-        { field: 'etunimi', headerName: 'Etunimi', width: 70 },
+        { field: 'nimi', headerName: 'Etunimi', width: 70 },
         { field: 'sukunimi', headerName: 'Sukunimi', width: 85 },
         { field: 'ika', headerName: 'Ikä', width: 35 },
-        { field: 'id', headerName: 'id', width: 35 },
+        { field: 'Id', headerName: 'id', width: 35 },
     ];
 
     return (
@@ -14,12 +14,13 @@ export default function Potilaslista({ rows, onSelect }) {
             <DataGrid
                 rows={rows}
                 columns={columns}
+                getRowId={(row) => row.Id ?? row.id}
                 hideFooter
                 density="compact"
                 disableMultipleRowSelection
                 onRowSelectionModelChange={(ids) => {
                     const selectedId = ids[0];
-                    const potilas = rows.find(r => r.id === selectedId);
+                    const potilas = rows.find(r => (r.Id ?? r.id) === selectedId);
                     onSelect?.(potilas);
                 }}
             />

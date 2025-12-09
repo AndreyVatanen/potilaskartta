@@ -1,0 +1,4 @@
+GET http://localhost:8080/api/jatkohoito/hae/jatkohoito/{{potilasId}}
+Content-Type: application/json
+
+###

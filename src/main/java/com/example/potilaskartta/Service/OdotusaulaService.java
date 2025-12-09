@@ -33,6 +33,7 @@ public class OdotusaulaService {
         Potilas potilas = potilasRepo.findById(potilasId).orElseThrow(() -> new RuntimeException("potilasta ei löytynyt"));
         Odotusaula odotusaula = odotusaulaRepo.findById(odotusaulaId).orElseThrow(() -> new RuntimeException("potilasta ei löytynyt"));
 
+
         potilas.setOdotusaula(odotusaula);
         odotusaula.getPotilaat().add(potilas);
 

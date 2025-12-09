@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/api/paikka")
 public class PaikkaControlleri {
@@ -15,9 +16,9 @@ public class PaikkaControlleri {
     PaikkaService paikkaService;
 
 
-    @PostMapping("/luo")
-    public Paikka luoPaikka(@RequestBody Paikka paikka) {
-        return paikkaService.uusiPaikka(paikka);
+    @PostMapping("/luo_paikka/{paivystysId}")
+    public Paikka luoPaikka(@RequestBody Paikka paikka, @PathVariable Long paivystysId) {
+        return paikkaService.uusiPaikka(paikka, paivystysId);
     }
 
     @PostMapping("/vie/{paikkaId}/{potilasId}")
@@ -27,8 +28,8 @@ public class PaikkaControlleri {
 
 
     @GetMapping("/osastopotilaat/{paivystysId}")
-    public List<Paikka> Naytapaikat(@PathVariable Long paivystysId) {
-        return null;
+    public List<Potilas> Naytapaikat(@PathVariable Long paivystysId) {
+        return paikkaService.naytaosastoPotilaat(paivystysId);
     }
 
 

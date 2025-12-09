@@ -29,11 +29,20 @@ public class DiagnoosiService {
 
     // muokattava
     public boolean poistaDiagnoosi(Long diagnoosiId) {
-        if (diagnoosiRepo.existsById(diagnoosiId)) {
-            diagnoosiRepo.deleteById(diagnoosiId);
-            return true;
-        }
-        return false;
+        Diagnoosi diagnoosi = diagnoosiRepo.findById(diagnoosiId)
+                .orElseThrow(() -> new RuntimeException("diagnoosia ei löytynyt"));
+
+
+        Potilas potilas = diagnoosi.getPotilas();
+
+        potilas.getDiagnoosit().remove(diagnoosi);
+        diagnoosi.setPotilas(null);
+        potilasRepo.save(potilas);
+        diagnoosiRepo.delete(diagnoosi);
+
+
+        return true;
+
     }
 
 

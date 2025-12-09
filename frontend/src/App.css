@@ -208,36 +208,26 @@
     position: absolute;
 }
 
-.potilas-teksti{top:30px; left:5px }
+.potilas-teksti{top:30px; left:20px }
 
 .triage-indicator {
+    position: absolute;
+    top: 6px;
+    right: 6px;
     width: 14px;
     height: 14px;
     border-radius: 50%;
-    display: inline-block;
 }
 
-.triage-indicator.A {
+.triage-indicator.PUNAINEN {
     background: red;
-    position: absolute;
-
 }
 
-.triage-indicator.A{top:7px; left:80px }
-
-.triage-indicator.B {
-    background: yellow;
+.triage-indicator.KELTAINEN {
+    background: gold;
     border: 1px solid #888;
-    position: absolute;
 }
 
-.triage-indicator.B{top:7px; left:80px }
-
-.triage-indicator.C {
+.triage-indicator.VIHREA {
     background: green;
-    position: absolute;
 }
-
-.triage-indicator.C{top:7px; left:80px }
-
-
