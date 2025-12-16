@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class KiireellisyysService {
 
-
     private final PotilasRepo potilasRepo;
 
     public KiireellisyysService(PotilasRepo potilasRepo) {

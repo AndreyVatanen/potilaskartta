@@ -486,7 +486,7 @@ const styles = {
         color: "black"
     },
     modal: {
-        background: "white",
+        background: "linear-gradient(135deg, lightslategrey, white, lightslategrey)",
         width: "500px",
         padding: "20px",
         borderRadius: "12px",

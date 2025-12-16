@@ -27,7 +27,7 @@ public class DiagnoosiService {
         return diagnoosiRepo.save(diagnoosi);
     }
 
-    // muokattava
+
     public boolean poistaDiagnoosi(Long diagnoosiId) {
         Diagnoosi diagnoosi = diagnoosiRepo.findById(diagnoosiId)
                 .orElseThrow(() -> new RuntimeException("diagnoosia ei löytynyt"));

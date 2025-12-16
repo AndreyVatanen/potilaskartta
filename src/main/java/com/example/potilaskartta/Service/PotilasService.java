@@ -1,8 +1,7 @@
 package com.example.potilaskartta.Service;
+import com.example.potilaskartta.Entiteetti.Kiireellisyys;
 import com.example.potilaskartta.Entiteetti.Paikka;
 import com.example.potilaskartta.Entiteetti.Potilas;
-import com.example.potilaskartta.Repo.OdotusaulaRepo;
-import com.example.potilaskartta.Repo.PaikkaRepo;
 import com.example.potilaskartta.Repo.PotilasRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +17,9 @@ public class PotilasService {
 
 
     public Potilas lisaaPotilas(Potilas potilas) {
+        if (potilas.getKiireellisyys() == null) {
+            potilas.setKiireellisyys(Kiireellisyys.VIHREA);
+        }
         return potilasRepo.save(potilas);
     }
 

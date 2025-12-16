@@ -32,6 +32,12 @@ public class Potilas {
     private Paikka paikka;
 
 
+    @OneToOne // yksi tieto per potilas
+    @JoinColumn(name = "kotiutusteksti_id")
+    @JsonManagedReference("kotiutusteksti-potilas")
+    Kotiutustieto kotiutustieto;
+
+
     @ManyToOne
     @JoinColumn(name = "ambulanssi_id")
     @JsonBackReference("ambulanssi-potilas")

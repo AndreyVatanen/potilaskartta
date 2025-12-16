@@ -4,21 +4,69 @@
   padding: 2rem;
   text-align: center;
 
+
 }
 .potilas-kartta {
     margin-top: -5px;
     height: 1px;
     color: white;
     position: relative;
+
+}
+
+.lisaa-potilas-nappi {
+    position: absolute;
+    left: 756px;
+    top: 335px;
+    z-index: 10;
+
+    border-radius: 10px;
+
+    background: linear-gradient(
+            135deg,
+            lightslategrey,
+            white,
+            lightslategrey
+    );
+}
+
+
+.lisaa-potilas-nakyma {
+    position: fixed;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 420px;
+    z-index: 100;
+
+    padding: 16px;
+    border-radius: 16px;
+
+    background: linear-gradient(
+            135deg,
+            lightslategrey,
+            white,
+            lightslategrey
+    );
+
+    box-shadow: 0 8px 30px rgba(0,0,0,0.35);
 }
 
 
 .odottava_laatikko{
     width: 300px;
     height: 250px;
-    background-color: green;
     margin: 20px auto;
     position: relative;
+    border-radius: 10px;
+
+    background: linear-gradient(
+            135deg,
+            lightslategrey,
+            white,
+            lightslategrey
+    );
 }
 
 .odottavat_lista{
@@ -35,9 +83,17 @@
 .ambulanssi_laatikko{
     width: 300px;
     height: 250px;
-    background-color: orangered;
     margin: 20px auto;
     position: relative;
+    border-radius: 10px;
+
+    background: linear-gradient(
+            135deg,
+            lightslategrey,
+            white,
+            lightslategrey
+    );
+
 }
 
 .ambulanssi_laatikko{top: -235px; left:155px}
@@ -53,9 +109,18 @@
 .paivystys_laatikko {
     width: 610px;
     height: 500px;
-    background-color: greenyellow;
     margin: 20px auto;
     position: relative;
+    border-radius: 10px;
+
+    background: linear-gradient(
+           135deg,
+           lightslategrey,
+            white,
+           lightslategrey
+
+
+    );
 }
 
 .paivystys_laatikko{top: -250px; left:1px}
@@ -171,7 +236,7 @@
     height: 60px;
 }
 
-.luo_nappi{ top:30px; left: 15px }
+.luo_nappi{ top:85px; left: 15px }
 
 
 .poista_nappi{
@@ -181,7 +246,7 @@
     width: 120px;
     height: 60px;
 }
-.poista_nappi{ top:120px; left: 15px }
+.poista_nappi{ top:160px; left: 15px }
 
 
 .paivytyksentila_teksti{

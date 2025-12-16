@@ -1,13 +1,9 @@
 package com.example.potilaskartta.Controlleri;
-import com.example.potilaskartta.Entiteetti.Henkilokunta;
-import com.example.potilaskartta.Entiteetti.Paikka;
-import com.example.potilaskartta.Entiteetti.Paivystys;
-import com.example.potilaskartta.Entiteetti.Potilas;
+import com.example.potilaskartta.Entiteetti.*;
 import com.example.potilaskartta.Service.PaivystysService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
@@ -27,10 +23,19 @@ public class PaivystysControlleri {
         return paivystysService.poistaPaivystys(paivystysId);
     }
 
+    @GetMapping("/odotusaulapotilaat_kpl/{odotusaulaId}")
+    public int odotusaulamaara(@PathVariable Long odotusaulaId) {
+        return paivystysService.laskeodotusAulapotilaat(odotusaulaId);
+    }
+
+    @GetMapping("/ambulanssipotilaat_kpl/{ambulanssiId}")
+    public int ambulanssimaara(@PathVariable Long ambulanssiId) {
+        return paivystysService.laskeAmbulanssipotilaat(ambulanssiId);
+    }
 
 
-    @GetMapping("/ruuhkatilanne")
-    public double laskeruuhka(List<Potilas> potilaat, List<Henkilokunta> tyontekijat) {
-        return paivystysService.laskeruuhkaTilanne(potilaat,tyontekijat);
+    @GetMapping("/osastopotilaat_kpl/{paivystysId}")
+    public int osastomaara(@PathVariable Long paivystysId) {
+        return paivystysService.laskeosastopotilaat(paivystysId);
     }
 }

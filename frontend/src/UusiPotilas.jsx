@@ -118,7 +118,7 @@ const styles = {
     },
 
     modalContainer: {
-        background: "white",
+        background: "linear-gradient(135deg, lightslategrey, white, lightslategrey)",
         borderRadius: "12px",
         width: "320px",
         padding: "25px",
@@ -131,6 +131,7 @@ const styles = {
     modalHeader: {
         margin: 0,
         textAlign: "center",
+        color: "black"
     },
 
     formField: {

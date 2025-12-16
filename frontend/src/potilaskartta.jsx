@@ -5,6 +5,7 @@ import KuormitusData from "./KuormitusData.jsx";
 import UusiPotilas from "./UusiPotilas.jsx";
 import KotiutaPotilas from "./KotiutaPotilas.jsx";
 import PotilasNakyma from "./PotilasNakyma.jsx";
+import LisaaPotilas from "./LisaaPotilas.jsx"
 
 
 function Potilaskartta() {
@@ -13,6 +14,7 @@ function Potilaskartta() {
     const [naytaPotilas, setNaytaPotilas] = useState(null);
     const [odottava, setOdottava] = useState([]);
     const [ambulanssi, setAmbulanssi] = useState([]);
+    const [showLisaaPotilas, setShowLisaaPotilas] = useState(false);
 
 
     useEffect(() => {
@@ -195,15 +197,34 @@ function Potilaskartta() {
   return (
       <>
       <h2 className= "potilas-kartta">Potilaskartta</h2>
+      <div className="lisaa-potilas-nappi">
+          <button
+              className="luo_nappi"
+              onClick={() => setShowLisaaPotilas(true)}
+          >
+              lisää potilas
+          </button>
+      </div>
+
+      {showLisaaPotilas && (
+          <div className="lisaa-potilas-nakyma">
+              <LisaaPotilas
+                  onClose={() => setShowLisaaPotilas(false)}
+                  onSuccess={() => setShowLisaaPotilas(false)}
+              />
+          </div>
+      )}
+
+
           <div className="odottava_laatikko">
-              <h3 className="odotusaula_teksti">Odotusaula</h3>
+              <h3 className="odotusaula_teksti" style={{ color: "black" }}>Odotusaula</h3>
               <div className="odottavat_lista" >
                   <Potilaslista rows={odottava} />
 
               </div>
           </div>
           <div className="ambulanssi_laatikko">
-              <h3 className="ambulanssipotilaat_teksti">Ambulanssi potilaat</h3>
+              <h3 className="ambulanssipotilaat_teksti"style={{ color: "black" }}>Ambulanssi potilaat</h3>
               <div className="ambulanssi_lista" >
                   <Potilaslista rows={ambulanssi} />
 
