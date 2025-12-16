@@ -33,17 +33,13 @@ public class HoitoohjeService {
                 .orElseThrow(() -> new RuntimeException("Hoito-ohjetta ei löytynyt"));
 
         Potilas potilas = hoitoohje.getPotilas();
-
-        // irrota listasta
         potilas.getHoito_ohje().remove(hoitoohje);
 
-        // irrota viite hoito-ohjeelta
+
         hoitoohje.setPotilas(null);
 
-        // tallenna potilas (päivittää listan)
-        potilasRepo.save(potilas);
 
-        // poista hoito-ohje taulusta
+        potilasRepo.save(potilas);
         hoitoohjeRepo.delete(hoitoohje);
 
         return true;

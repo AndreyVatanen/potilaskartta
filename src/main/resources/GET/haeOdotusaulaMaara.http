@@ -1,0 +1,4 @@
+GET http://localhost:8080/api/paivystys/odotusaulapotilaat_kpl/1
+Content-Type: application/json
+
+###

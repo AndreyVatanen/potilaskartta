@@ -4,21 +4,30 @@
   padding: 2rem;
   text-align: center;
 
+
 }
 .potilas-kartta {
     margin-top: -5px;
     height: 1px;
     color: white;
     position: relative;
+
 }
 
 
 .odottava_laatikko{
     width: 300px;
     height: 250px;
-    background-color: green;
     margin: 20px auto;
     position: relative;
+    border-radius: 10px;
+
+    background: linear-gradient(
+            135deg,
+            lightslategrey,
+            white,
+            lightslategrey
+    );
 }
 
 .odottavat_lista{
@@ -35,9 +44,17 @@
 .ambulanssi_laatikko{
     width: 300px;
     height: 250px;
-    background-color: orangered;
     margin: 20px auto;
     position: relative;
+    border-radius: 10px;
+
+    background: linear-gradient(
+            135deg,
+            lightslategrey,
+            white,
+            lightslategrey
+    );
+
 }
 
 .ambulanssi_laatikko{top: -235px; left:155px}
@@ -53,9 +70,18 @@
 .paivystys_laatikko {
     width: 610px;
     height: 500px;
-    background-color: greenyellow;
     margin: 20px auto;
     position: relative;
+    border-radius: 10px;
+
+    background: linear-gradient(
+           135deg,
+           lightslategrey,
+            white,
+           lightslategrey
+
+
+    );
 }
 
 .paivystys_laatikko{top: -250px; left:1px}
