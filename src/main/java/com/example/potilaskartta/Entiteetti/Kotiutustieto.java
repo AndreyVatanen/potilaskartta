@@ -14,7 +14,8 @@ public class Kotiutustieto {
     private String tieto;
 
 
-    @OneToOne(mappedBy = "kotiutustieto")
+    @OneToOne
+    @JoinColumn(name = "potilas_id", nullable = false, unique = true)
     @JsonBackReference("kotiutusteksti-potilas")
-    Potilas potilas;
+    private Potilas potilas;
 }

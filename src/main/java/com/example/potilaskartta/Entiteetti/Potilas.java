@@ -3,7 +3,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +21,10 @@ public class Potilas {
     private Integer ika;
 
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private PotilasTila tila = PotilasTila.AKTIIVINEN;
+
     // potilaalla on yksi kiireellisyysluokitus
     @Enumerated(EnumType.STRING)
     private Kiireellisyys kiireellisyys;
@@ -32,10 +35,14 @@ public class Potilas {
     private Paikka paikka;
 
 
-    @OneToOne // yksi tieto per potilas
-    @JoinColumn(name = "kotiutusteksti_id")
+    @OneToOne(
+            mappedBy = "potilas",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY
+    )
     @JsonManagedReference("kotiutusteksti-potilas")
-    Kotiutustieto kotiutustieto;
+    private Kotiutustieto kotiutustieto;
 
 
     @ManyToOne

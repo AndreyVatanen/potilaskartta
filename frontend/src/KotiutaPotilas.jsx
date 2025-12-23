@@ -28,11 +28,40 @@ export default function KotiutaPotilas({
         return "";
     }
 
-    function handleSave() {
+    async function handleSave() {
         const potilas = kaikkiPotilaat.find(p => p.id === Number(valittuId));
-        if (!potilas) return;
+        if (!potilas || !kotiutusTeksti.trim()) return;
 
-        onKotiuta({ potilas, teksti: kotiutusTeksti });
+        try {
+            const response = await fetch(
+                `http://localhost:8080/api/kotiutustieto/${potilas.id}/kotiuta`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ tieto: kotiutusTeksti })
+                }
+            );
+
+            if (!response.ok) {
+                throw new Error("Kotiutus epäonnistui");
+            }
+
+            const tallennettuKotiutustieto = await response.json();
+
+
+            onKotiuta({
+                potilas,
+                kotiutustieto: tallennettuKotiutustieto
+            });
+
+            onClose();
+
+        } catch (error) {
+            console.error(error);
+            alert("Virhe kotiutuksessa");
+        }
     }
 
     return (
@@ -79,7 +108,6 @@ const styles = {
         top: 0, left: 0,
         width: "100vw",
         height: "100vh",
-        background: "rgba(0,0,0,0.4)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",

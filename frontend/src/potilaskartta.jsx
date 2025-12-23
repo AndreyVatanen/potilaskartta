@@ -165,16 +165,8 @@ function Potilaskartta() {
 
 
 
-    async function handleKotiuta({ potilas, teksti }) {
-        try {
-            await fetch(
-                `http://localhost:8080/api/potilas/poista/${potilas.id}`,
-                { method: "DELETE" }
-            );
-        } catch (err) {
-            alert("Virhe kotiutuksessa");
-            return;
-        }
+    async function handleKotiuta({potilas}) {
+
 
         // poista frontend-tilasta
         setOdottava(prev => prev.filter(p => p.id !== potilas.id));
