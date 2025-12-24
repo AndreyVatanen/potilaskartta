@@ -1,111 +1,178 @@
-Tämä projekti on kehitteillä oleva fullstack-sovellus, jonka tarkoituksena on mallintaa päivystyspoliklinikan potilashallintajärjestelmää.
+Yleiskuvaus
 
-Sovellus sisältää Spring Boot -taustapalvelun sekä React-pohjaisen käyttöliittymän, joiden avulla voidaan:
+Potilaskartta on paikallisesti ajettava fullstack-sovellus, jonka tarkoituksena on mallintaa päivystyspoliklinikan potilasvirtaa ja potilashallintaa.
+Sovellus on toteutettu Spring Boot -taustapalvelulla ja React-pohjaisella käyttöliittymällä.
 
-hallita potilaita ja henkilökuntaa
+Projektin painopiste ei ole visuaalisessa viimeistelyssä vaan:
 
-sijoittaa potilaita päivystyksen eri paikkoihin
+selkeässä domain-mallinnuksessa
 
-tarkastella päivystyksen kuormitusta datan avulla
+relaatiotietokannan oikeassa käytössä
 
-visualisoida tilannetta yksinkertaisten UI-komponenttien kautta
+frontend–backend-yhteistyössä
 
-Projekti on vielä kehitysvaiheessa, ja toiminnallisuuksia laajennetaan sekä backendin että frontendin puolella.
+tilapohjaisessa potilaslogiikassa (aktiivinen ↔ kotiutettu)
 
-Projektin tavoite
+Keskeiset toiminnallisuudet
+Potilaiden lisääminen
 
-Tavoitteena on luoda yksinkertainen potilaskartta, joka tarjoaa:
+Käyttäjä voi lisätä potilaan antamalla:
 
-Potilasrekisterin
+etunimen
 
-potilaan luonti
+sukunimen
 
-potilaan poistaminen
+iän
 
-potilaslistojen tarkastelu
+Potilas lisätään joko:
 
-Henkilökunnan hallinta
+odotusaulaan
 
-uuden työntekijän lisääminen
+tai ennakkoilmoitettuihin ambulanssipotilaisiin
 
-henkilökunnan määrä
+Potilaiden sijoittelu ja siirtäminen
 
-työntekijän poistaminen
+Potilaat jaetaan kolmeen pääryhmään:
 
-Päivystyksen paikat
+Odotusaula
 
-potilaan sijoittaminen hoitopaikalle
+Ambulanssipotilaat
 
-hoitopaikkojen hallinta
-Päivystyksen kuormituksen seuranta
+Päivystyksen osastopaikat (1–9)
 
-Backend laskee päivystyksen ruuhkatilannetta potilaiden kiireellisyysluokituksen perusteella.
-Frontend näyttää kuormituksen havainnollistettuna (esim. kaaviot).
+Käyttäjä voi:
 
-Visuaalinen potilaskartta
+siirtää potilaan odotusaulasta tai ambulanssista osastopaikalle
 
-Käyttöliittymässä esitetään:
+määrittää siirron yhteydessä:
 
-odotusaulan potilaat
+kiireellisyysluokituksen
 
-ambulanssipotilaat
+A = kiireellinen
 
-hoitopaikat
+B = keskikiireellinen
 
-hallintapaneeli toiminnoille
+C = ei kiireellinen
 
-Frontend käyttää Material UI -komponentteja (DataGrid, PieChart) datan esittämiseen.
+osastopaikan
 
-Käytetyt teknologiat
+Osastopaikoilla potilaan:
+
+sukunimi
+
+kiireellisyysluokitus
+näytetään värikoodattuna käyttöliittymässä.
+
+Potilastietojen tarkastelu ja muokkaus
+
+Osastopaikalla olevan potilaan tiedot voidaan avata erilliseen näkymään.
+
+Näkymässä käyttäjä voi tarkastella ja hallita:
+
+potilaan perustietoja (ikä, kiireellisyysluokitus)
+
+diagnooseja
+
+lääkityksiä
+
+hoito-ohjeita
+
+jatkohoito-ohjeita
+
+Tietomalli on tarkoituksella pidetty rajattuna ja yksinkertaisena, koska projekti on henkilökohtainen harjoitus eikä oikea potilastietojärjestelmä.
+
+Kotiutus
+
+Potilas voidaan kotiuttaa riippumatta siitä, missä hän sijaitsee:
+
+odotusaulassa
+
+ambulanssipotilaissa
+
+osastopaikalla
+
+Kotiutuksen yhteydessä:
+
+käyttäjä kirjoittaa kotiutustiedon / yhteenvedon
+
+potilaan tila vaihtuu AKTIIVINEN → KOTIUTETTU
+
+potilas poistuu aktiivisista näkymistä
+
+Potilasta ei poisteta tietokannasta, vaan:
+
+kotiutus tallennetaan omana entiteettinään
+
+potilaan ja kotiutustiedon välillä on selkeä one-to-one-suhde
+
+Päivystyksen kuormituksen visualisointi
+
+Käyttöliittymässä näytetään graafisesti:
+
+odotusaulan potilasmäärä (vihreä)
+
+ambulanssipotilaat (punainen)
+
+osastopotilaat (keltainen)
+
+Visualisointi antaa nopean yleiskuvan päivystyksen kuormitustilanteesta.
+
+
+---------------------------------------------------------------------------------------------------------------------------
+
+Tekninen toteutus
 Backend
 
-Java / Spring Boot
+Java + Spring Boot
 
-Spring Data JPA
+Spring Data JPA (Hibernate)
 
-H2 / PostgreSQL (riippuen jatkokehityksestä)
+PostgreSQL
 
-REST API
+Transaktionhallinta (@Transactional)
 
-Lombok
+Selkeä domain-malli:
+
+Potilas
+
+Kotiutustieto
+
+Paikka
+
+Ambulanssi
+
+Odotusaula
+
+Diagnoosi, Lääkelista, Hoito-ohje, Jatkohoito
+
+Enum-pohjaiset tilat ja luokitukset
 
 Frontend
 
-React
+React (Vite)
 
-Material UI (MUI DataGrid, Charts)
+Fetch API
 
-JavaScript / JSX
+Komponenttipohjainen rakenne
 
-CSS
+Tilanhallinta Reactin hookeilla
 
-Kehitysvaihe:
+Modal-pohjaiset toiminnot (lisäys, siirto, kotiutus)
 
-Projekti on aktiivisesti kehitteillä.
-Seuraavat osa-alueet ovat vielä työn alla:
+Arkkitehtuuriset periaatteet
 
-frontendin ja backendin integrointi (API-kutsut)
+Potilasta ei koskaan poisteta kotiutuksen yhteydessä → tilaohjattu logiikka
 
-käyttöliittymän laajentaminen
+Relaatiot on mallinnettu eksplisiittisesti (OneToOne, OneToMany, ManyToOne)
 
-parempi validointi ja virheenkäsittely
+Backend vastaa liiketoimintalogiikasta, frontend näkymästä ja tilapäivityksistä
 
-paikkakohtainen potilashallinta
+Tietokannan eheys suojattu sovelluslogiikassa
 
-päivystyskohtaiset tilastot
+Kehitysympäristö
 
-lisätoimenpiteiden kirjaaminen
+Backend: http://localhost:8080
 
-autentikointi (mahdollisesti myöhemmin)
+Frontend: http://localhost:5173
 
-Tarkoitus ja käyttökohde
-
-Projektin ensisijainen tarkoitus on:
-
-demonstroida fullstack-osaamista (Java + React)
-
-mallintaa päivystyksen potilasvirtaa yksinkertaisessa muodossa
-
-tarjota perusrakenne laajemmalle terveydenhuollon hallintasovellukselle
-
-toimia oppimisprojektina ja portfolionäytteenä trainee- ja juniortason IT-rooleihin
+Sovellus on tarkoitettu ajettavaksi paikallisesti kehitysympäristössä
